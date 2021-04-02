@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+cmd='s/\s+\n$/\n/'
+if [ $# -gt 0 ]; then
+  for arg in "$@"; do
+    perl -pi -e "$cmd" "$arg"
+  done
+else
+  cat | perl -pe "$cmd"
+fi

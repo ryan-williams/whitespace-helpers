@@ -29,3 +29,5 @@ defn een echo -ne
 
 defn cls count-leading-spaces
 
+defn ktw rstrip-whitespace
+defn rsw rstrip-whitespace
