@@ -24,6 +24,11 @@ alias ebl="echo ''"
 defn e echo
 defn ee echo -e
 defn en echo -n
+echo_title() {
+    echo -n "$*: "
+}
+export -f echo_title
+defn et echo_title
 defn ene echo -ne
 defn een echo -ne
 
