@@ -32,7 +32,7 @@ defn et echo_title
 defn ene echo -ne
 defn een echo -ne
 
-defn cls count-leading-spaces
+defn cnls count-leading-spaces
 
 defn ktw rstrip-whitespace
 defn rsw rstrip-whitespace
