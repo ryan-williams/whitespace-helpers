@@ -36,3 +36,7 @@ defn cnls count-leading-spaces
 
 defn ktw rstrip-whitespace
 defn rsw rstrip-whitespace
+
+# Trim aliases
+alias trm='trim'           # Completely trim both sides, no trailing newline
+alias trml='trim -n'       # Trim with trailing newline

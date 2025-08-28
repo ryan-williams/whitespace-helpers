@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
 
-#sed "s/^[[:space:]]*//;s/[[:space:]]*$//;/^$/d"
-sed "s/^[[:space:]]*//;s/[[:space:]]*$//"
+# Parse options
+add_newline=false
+if [ "$1" = "-n" ] || [ "$1" = "--newline" ]; then
+    add_newline=true
+    shift
+fi
+
+# Remove leading and trailing whitespace from each line, and remove blank lines
+if $add_newline; then
+    # Trim and ensure trailing newline
+    sed "s/^[[:space:]]*//;s/[[:space:]]*$//;/^$/d" | awk 'NR>1{print prev}{prev=$0}END{if(NR>0)print prev}'
+else
+    # Trim and remove trailing newline
+    sed "s/^[[:space:]]*//;s/[[:space:]]*$//;/^$/d" | awk 'NR>1{print prev}{prev=$0}END{if(NR>0)printf "%s", prev}'
+fi
+
+# Alternative without removing blank lines (old behavior)
+#sed "s/^[[:space:]]*//;s/[[:space:]]*$//"
 
 # Alternative, seems almost as fast but maybe a little less portable
 #pe "s/^\s+(.*?)\s*\n$/\1\n/"
