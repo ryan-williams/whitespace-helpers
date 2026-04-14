@@ -3,9 +3,14 @@
 # Parse options
 add_newline=false
 use_c_locale=true
+join=false
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
+        -j|--join)
+            join=true
+            shift
+            ;;
         -n|--newline)
             add_newline=true
             shift
@@ -25,8 +30,15 @@ if $use_c_locale; then
     export LC_ALL=C
 fi
 
-# Remove leading and trailing whitespace from each line, and remove blank lines
-if $add_newline; then
+if $join; then
+    # Delete all whitespace (including newlines); optionally add trailing newline
+    if $add_newline; then
+        tr -d '[:space:]'
+        echo
+    else
+        tr -d '[:space:]'
+    fi
+elif $add_newline; then
     # Trim and ensure trailing newline
     sed "s/^[[:space:]]*//;s/[[:space:]]*$//;/^$/d" | awk 'NR>1{print prev}{prev=$0}END{if(NR>0)print prev}'
 else
